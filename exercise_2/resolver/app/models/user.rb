@@ -13,4 +13,5 @@
 #  index_users_on_email  (email)
 #
 class User < ApplicationRecord
+  has_many :follows, class_name: "Follow"
 end
