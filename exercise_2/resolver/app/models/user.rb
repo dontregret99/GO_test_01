@@ -15,6 +15,10 @@
 #
 class User < ApplicationRecord
 
+  # Validations
+  validates :username, presence: true
+  validates :email, presence: true
+
   # Associations
   has_many :follows, class_name: "Follow", dependent: :destroy
 
@@ -31,6 +35,6 @@ class User < ApplicationRecord
   end
 
   def new_followers_in_current_month
-    self.follower.where("created_at >= ?", Date.current.beginning_of_month)
+    self.follows.where("created_at >= ?", Date.current.beginning_of_month)
   end
 end
