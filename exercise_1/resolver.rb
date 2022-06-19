@@ -1,23 +1,26 @@
-def my_method(target, arr)
-  result = []
-  valid_first = []
+def find_the_pairs(sum, arr)
+  pairs = []
+  first_elements = []
   second_elements = []
 
-  arr.each do |i|
-    if (i < target) && (i != target/2) && !valid_first.include?(i)
-      if second_elements.include?(i)
-        pos = second_elements.find_index(i)
-        result[pos] = [result[pos][0], i]
-        valid_first << i
+  arr.each do |element|
+    if (element < sum) && (element != sum/2) && !first_elements.include?(element)
+      if second_elements.include?(element)
+        pos = second_elements.find_index(element)
+        pairs[pos] = [pairs[pos][0], element]
+
+        first_elements << element
       else
-        result << [i, nil]
-        second_elements << (target - i)
+        pairs << [element, nil]
+        second_elements << (sum - element)
       end
     end
   end
 
+  result = []
+  pairs.each do |pair|
+    result << pair if pair[1] != nil
+  end
+
   result
 end
-
-p my_method(10, [3, 4, 5, 6, 7])
-p my_method(8, [3, 4, 5, 4, 4])
